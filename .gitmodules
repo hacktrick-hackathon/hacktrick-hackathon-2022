@@ -1,4 +1,4 @@
 [submodule "hacktrick_ai"]
 	path = hacktrick_ai
 	url = https://github.com/hacktrick-hackathon/hacktrick_ai
-	branch = main
+	branch = master
