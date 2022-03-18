@@ -25,16 +25,21 @@ class RllibPPOModel(TFModelV2):
         d2rl = custom_params["D2RL"]
         assert type(d2rl) == bool
 
-        ## Create graph of custom network. It will under a shared tf scope such that all agents
-        ## use the same model
+        ## Model inputs
+        # Your input is a tensor the size of the grid with each channel representing a diffetent item as stated in the documentation
+        # For example, in the channel representing a solar cell you will have an array (h x w) with 1 if a solar cell exists in this location and 0 otherwise
         self.inputs = tf.keras.Input(shape=obs_space.shape, name="observations")
         out = self.inputs
 
         # Implement your model architicture here using the given parameters if needed
 
+        # This is just a dummpy layer so that the model works out of the box
+        # It uses normal tf functional API and you can do the same
+        out = tf.keras.layers.Flatten()(out)
+
+        ## Model ouptus
         # Linear last layer for action distribution logits
         layer_out = tf.keras.layers.Dense(self.num_outputs)(out)
-
         # Linear last layer for value function branch of model
         value_out = tf.keras.layers.Dense(1)(out)
 
